@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  engineType = "library"
 }
 
 datasource db {
@@ -26,9 +25,9 @@ model Post {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   body String
-  Image String?
+  Image String? 
   likeCount Int @default(0)
-  Slug String?
+  slug String?
   createdAt DateTime @default(now())
   author User @relation(fields: [authorId] , references: [id] , onDelete:Cascade , onUpdate:Cascade)
   authorId String @db.ObjectId
