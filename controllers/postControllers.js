@@ -16,9 +16,9 @@ const postBlog = async (req , res , next) => {
         data:{
             title,
             body,
-            authorId,
+            author:{connect:{id:authorId}},
             Image:image,
-            Slug:slug,
+            slug,
             likeCount
         }
     });
@@ -26,5 +26,15 @@ const postBlog = async (req , res , next) => {
     next();
 }
 
+const getAllpost = async (req , res , next) => {
+    const user = res.user;
+    const posts = await prisma.post.findMany({
+        where:{
+            authorId:user.id
+        }
+    })
+    res.posts = posts;
+    next();
+}
 
-module.exports = postBlog;
+module.exports = {postBlog , getAllpost};

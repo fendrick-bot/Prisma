@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const postBlog = require('../controllers/postControllers');
 const { authUser } = require('../controllers/userControllers');
+const { postBlog } = require('../controllers/postControllers');
 
 const router = Router();
 
@@ -14,5 +14,6 @@ router.get('/' , (req , res) => {
 router.post('/postblog' , [authUser , postBlog] , async (req , res) => {
     res.json(res.data);
 })
+
 
 module.exports = router;

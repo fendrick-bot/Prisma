@@ -1,0 +1,19 @@
+endpoinsts{
+    '/api/user/login => it will take username and password and if user not exist return success false and user not exist message
+                        and if user exist it will set token in cookies and return token and userdetails;
+                        and if you will send request without username or password so it will send error "all fields required"
+
+    "/api/user/signup" => it will take username password emails and name and create a user in database and else everthing will same as login 
+
+    "/api/post/postBlog => it will try to get token from headers and if token is not present it means user is not login so it will show
+                            error login or signup first , and if everthing will good it will take only title and body and create a post 
+                            of a perticular user and send postDetails;
+
+    "api/user" => if user is loggedin it will give you user details;
+
+    "api/user/all?username="username" => any one can make this request and see all details (post , followers , following , allposts) of a 
+                                        perticular user that is provided in username;
+
+    
+
+}
