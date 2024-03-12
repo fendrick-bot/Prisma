@@ -11,7 +11,7 @@ endpoinsts{
 
     "api/user" => if user is loggedin it will give you user details;
 
-    "api/user/all?username="username" => any one can make this request and see all details (post , followers , following , allposts) of a 
+    "api/user/all?username="username" => any one can make this request and see all details (post , followersCount , followingCount , allposts) of a 
                                         perticular user that is provided in username;
 
     

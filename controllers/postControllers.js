@@ -26,15 +26,24 @@ const postBlog = async (req , res , next) => {
     next();
 }
 
-const getAllpost = async (req , res , next) => {
-    const user = res.user;
-    const posts = await prisma.post.findMany({
+const getAlldata = async (req , res , next) => {
+    const user = req.query.username;
+    if(!user){
+        return res.json({
+            success:false,
+            error:"please provide username"
+        })
+    }
+    const data = await prisma.user.findUnique({
         where:{
-            authorId:user.id
+            username:user
+        },
+        include:{
+            posts:true
         }
     })
-    res.posts = posts;
+    res.data = data;
     next();
 }
 
-module.exports = {postBlog , getAllpost};
+module.exports = {postBlog , getAlldata};

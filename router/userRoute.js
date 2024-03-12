@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { signup, loginuser, authUser, getuserByUsername } = require("../controllers/userControllers");
-const { getAllpost } = require("../controllers/postControllers");
+const { getAlldata } = require("../controllers/postControllers");
 
 const router = Router();
 
@@ -8,10 +8,8 @@ router.get('/' , authUser , (req , res) => {
     res.json(req.user);
 })
 
-router.get('/all' , (req , res) => {
-    console.log(req.params);
-    return res.json({success:false});
-    // res.json({user:res.user , posts : res.posts});
+router.get('/all' , getAlldata , (req , res) => {
+    return res.json({success:true , data:res.data});
 })
 
 router.post('/signup' , signup , (req , res) => {
