@@ -39,7 +39,9 @@ const getAlldata = async (req , res , next) => {
             username:user
         },
         include:{
-            posts:true
+            posts:true,
+            followers:true,
+            following:true,
         }
     })
     res.data = data;

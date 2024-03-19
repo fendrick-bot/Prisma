@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { signup, loginuser, authUser, getuserByUsername } = require("../controllers/userControllers");
+const { signup, loginuser, authUser , addFollower } = require("../controllers/userControllers");
 const { getAlldata } = require("../controllers/postControllers");
 
 const router = Router();
@@ -18,6 +18,10 @@ router.post('/signup' , signup , (req , res) => {
 
 router.post('/login', loginuser , (req , res) => {
     res.json(res.data);
+})
+
+router.post('/addfollowing' , [authUser , addFollower] , (req , res) => {
+    res.json({success:true , data:res.data});
 })
 
 

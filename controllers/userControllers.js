@@ -99,4 +99,30 @@ const getuserByUsername = async (req , res , next) => {
     next();
 }
 
-module.exports = {signup , authUser , loginuser , getuserByUsername};
+const addFollower = async (req , res , next) => {
+    const {followingId} = req.body;
+    const userId = req.user.id;
+    try {
+        const data1 = await prisma.following.create({
+            data:{
+                followingId,
+                userId
+            }
+        })
+        const data2 = await prisma.followers.create({
+            data:{
+                userId:followingId,
+                followerId:userId
+            }
+        })
+        if(data1 && data2){
+            res.data = {following:data1 , follower:data2}
+        }
+        next();
+    } catch (error) {
+        return res.status(400).json({success:false , msg:"something went wrong"});
+    }
+    
+}
+
+module.exports = {signup , authUser , loginuser , getuserByUsername , addFollower};
