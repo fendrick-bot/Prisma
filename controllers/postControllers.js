@@ -48,4 +48,19 @@ const getAlldata = async (req , res , next) => {
     next();
 }
 
-module.exports = {postBlog , getAlldata};
+const suggestPost = async (req , res , next) => {
+    try {
+        const data = await prisma.post.findMany({
+            include:{
+                author:true
+            }
+        });
+        res.data = data;
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({success:false , msg:"something went wrong"});
+    }
+    next();
+}
+
+module.exports = {postBlog , getAlldata , suggestPost};
