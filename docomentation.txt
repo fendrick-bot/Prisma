@@ -14,6 +14,9 @@ endpoinsts{
     "api/user/all?username="username" => any one can make this request and see all details (post , followersCount , followingCount , allposts) of a 
                                         perticular user that is provided in username;
 
+
+    "api/user/:name -> you can perform serch query , authentication required , and you will get all user 
+                        (name , email , username) matching startswith name;
     
 
 }

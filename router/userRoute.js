@@ -24,7 +24,7 @@ router.post('/addfollowing' , [authUser , addFollower] , (req , res) => {
     res.json({success:true , data:res.data});
 })
 
-router.get('/:name' , finduser , (req , res) => {
+router.get('/:name' , [authUser , finduser] , (req , res) => {
     res.status(200).json({success:true , data:res.data});
 })
 
