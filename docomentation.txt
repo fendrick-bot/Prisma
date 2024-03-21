@@ -17,3 +17,8 @@ endpoinsts{
     
 
 }
+
+
+add these two variable in .env file;
+jwt_key = "amitkumar"
+DATABASE_URL = "

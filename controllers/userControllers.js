@@ -125,4 +125,21 @@ const addFollower = async (req , res , next) => {
     
 }
 
-module.exports = {signup , authUser , loginuser , getuserByUsername , addFollower};
+const finduser = async (req , res , next) => {
+    const name = req.params.name;
+    try {
+        const data = prisma.user.findMany({
+            where:{
+                username:{
+                    startsWith:name
+                }
+            }
+        })
+        res.data = data;
+    } catch (error) {
+        return res.status(400).json({success:false , msg:"something went wrong"});
+    }
+    next();
+}
+
+module.exports = {signup , authUser , loginuser , getuserByUsername , addFollower , finduser};
