@@ -16,7 +16,7 @@ router.post('/postblog' , [authUser , postBlog] , async (req , res) => {
 })
 
 router.get('/suggest' , [authUser , suggestPost] , (req , res) => {
-    res.status(200).json({success:true , data:res.data});
+    res.status(200).json({success:true , data:res.data})
 })
 
 

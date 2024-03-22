@@ -78,7 +78,7 @@ const loginuser = async (req , res , next) => {
 
 
 const authUser = (req , res , next) => {
-    const token = req.headers.cookie?.split('=')[1];
+    const token = req.headers.authorization?.split(' ')[1];
     if(!token) return res.json({success:false , "error":"user is not authourized"});
     const user = getuser(token);
     req.user = user;
