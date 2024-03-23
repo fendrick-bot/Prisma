@@ -4,8 +4,8 @@ const { getAlldata } = require("../controllers/postControllers");
 
 const router = Router();
 
-router.get('/' , authUser , (req , res) => {
-    res.json(req.user);
+router.get('/me' , authUser , (req , res) => {
+    res.json({success:true , data:req.user});
 })
 
 router.get('/all' , getAlldata , (req , res) => {

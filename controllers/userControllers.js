@@ -127,6 +127,9 @@ const addFollower = async (req , res , next) => {
 
 const finduser = async (req , res , next) => {
     const name = req.params.name;
+    if(name.length == 0){
+        return {success:false , msg:"enter search"}
+    }
     try {
         const data = await prisma.user.findMany({
             where:{
