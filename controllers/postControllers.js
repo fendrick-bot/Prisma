@@ -44,6 +44,9 @@ const getAlldata = async (req , res , next) => {
             following:true,
         }
     })
+    if(!data) {
+        return res.json({success:false , msg:"user not Found"});
+    }
     res.data = data;
     next();
 }
