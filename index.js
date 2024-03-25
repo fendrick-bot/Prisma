@@ -1,6 +1,7 @@
 const express = require('express');
 const userRoute = require('./router/userRoute');
 const postRoute = require('./router/postRoute');
+const chatRoute = require('./router/chatRoute');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use('/api/user' , userRoute);
 app.use('/api/post' , postRoute);
+app.use('/api/chat' , chatRoute);
 
 app.get('/' , (req , res) => {
     res.json({success:true});

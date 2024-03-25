@@ -22,6 +22,8 @@ model User{
   posts Post[]
   followers Followers[]
   following Following[]
+  conversationIds String[] @db.ObjectId
+  conversations Chat[] @relation(fields: [conversationIds], references: [id])
 }
 
 model Post {
@@ -50,3 +52,21 @@ model Following {
   followingId String @db.ObjectId
 }
 
+
+model Chat {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  lastMessageAt DateTime @default(now())
+  userIds String[] @db.ObjectId
+  users User[] @relation(fields: [userIds], references: [id])
+  message Message[]
+}
+
+model Message {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  senderId String @db.ObjectId
+  reciverId String @db.ObjectId
+  chatId String @db.ObjectId
+  text String
+  chat Chat @relation(fields: [chatId] , references: [id] , onDelete:Cascade , onUpdate:Cascade)
+}

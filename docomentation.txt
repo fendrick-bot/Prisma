@@ -21,6 +21,20 @@ endpoinsts{
                                 user will start following user provided in followingId;
 
     "api/post/suggest" -> authentication required and user system will suggest some blogs to user;
+
+
+
+
+
+    // chat controller
+    "api/chat" => it will recived data from token and return all chatlist or this user;
+
+    "api/chat/message" => it will recived token and reciverId , text and chatId and add this message to chat section
+
+
+    "api/chat/c/:id" => it will recived senderId form token and reciverId form params and return chatMessage
+                        of both user and if not any chatHistroy persent then it will create 
+                        a Chat Body;
 }
 
 
