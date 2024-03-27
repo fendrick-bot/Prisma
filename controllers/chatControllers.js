@@ -1,4 +1,6 @@
+
 const prisma = require("../prisma");
+const { pusher } = require("../utils/pusher");
 
 
 const getAllChatList = async (req , res , next) => {
@@ -10,16 +12,18 @@ const getAllChatList = async (req , res , next) => {
                 },
             },
             include:{
-                users:{
-                    where:{
-                        NOT: {
-                            id:req.user.id
-                        },
-                    }
-                }
+                users:true,
             }
         })
-        res.data = data;
+        filterdata = data.map((value) => {
+            value.users = value.users.filter((v) => {
+                if(v.id != req.user.id){
+                    return v;
+                }
+            })
+            return value;
+        })
+        res.data = filterdata;
     } catch (error) {
         console.log(error);
         return res.status(400).json({success:false , msg:"something went wrong"});
@@ -32,7 +36,7 @@ const getChatData = async (req , res , next) => {
         const data = await prisma.chat.findMany({
             where: {
                 userIds: {
-                  hasSome: [req.user.id , req.params.id],
+                  hasEvery: [req.user.id , req.params.id],
                 },
             },
             include:{
@@ -57,18 +61,22 @@ const getChatData = async (req , res , next) => {
 }
 
 const addChat = async (req , res , next) => {
-    const {reciverId , chatId , text} = req.body;
+    const {senderId , reciverId , chatId , text} = req.body;
+    pusher.trigger(`${reciverId}-${senderId}` , 'message', {
+        "message": text
+    });
     try {
         const data = await prisma.message.create({
             data:{
-                senderId:req.user.id,
+                senderId:senderId,
                 reciverId:reciverId,
                 chatId:chatId,
                 text:text
             }
         })
-        console.log(data);
+        res.data = data;
     } catch (error) {
+        console.log(error);
         return res.status(400).json({success:false , msg:"something went wrong"});
     }
     next();

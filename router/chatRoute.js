@@ -14,8 +14,8 @@ router.get('/c/:id' , [authUser , getChatData] , (req , res) => {
     res.status(200).json({success:true , data:res.data});
 })
 
-router.post('/message' , [authUser , addChat] , (req , res) => {
-    res.status(200).json({success:true});
+router.post('/message' , addChat , (req , res) => {
+    res.status(200).json({success:true , data:res.data});
 })
 
 
