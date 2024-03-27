@@ -4,6 +4,7 @@ const postRoute = require('./router/postRoute');
 const chatRoute = require('./router/chatRoute');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const port = process.env.PORT || 3000;
 require('dotenv').config();
 const app = express();
 
@@ -19,6 +20,6 @@ app.get('/' , (req , res) => {
     res.json({success:true});
 })
 
-app.listen('3000' , () => {
+app.listen(port , () => {
     console.log("app is listen at port 3000");
 })
